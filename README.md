@@ -20,15 +20,13 @@ The analysis focuses on:
 
 ## Dataset
 
-The repository contains a local CSV snapshot with mission dates, organizations, launch locations, mission details, rocket status, and mission status.
+The analysis uses the Kaggle dataset **Space Mission Dataset: 1957–2024** by M. Zeeshan Altaf:
 
-The dataset includes records into early 2024. Because 2024 is incomplete in the snapshot, the analysis is restricted to **1957–2023**.
+https://www.kaggle.com/datasets/mzeeshanaltaf/space-mission-dataset-1957-2024
 
-### Data provenance note
+The local CSV snapshot contains mission dates, organizations, launch locations, mission details, rocket status, and mission status.
 
-The exact original download URL/version for the CSV is not documented in the repository history. The column structure is consistent with datasets derived from historical launch listings such as the widely circulated “All Space Missions from 1957” datasets, but this project does **not** claim a specific original source without a verifiable record.
-
-Before using the project as a formal research source, the dataset provenance should therefore be confirmed independently.
+The dataset includes records into 2024. Because the 2024 observations are incomplete for a full-year comparison, the analysis is restricted to **1957–2023**.
 
 ## Methodology
 
@@ -117,7 +115,7 @@ space-exploration-analysis/
 ## Limitations
 
 - 2024 is excluded because it is incomplete in the dataset snapshot.
-- Dataset provenance is not fully documented and should be confirmed before research use.
+- The project uses a local snapshot of the Kaggle dataset; future Kaggle updates may differ from the version analyzed here.
 - Country labels extracted from launch locations do not necessarily represent the organization operating the mission.
 - National/regional and public/private comparisons rely on incomplete manually curated mappings.
 - Public/private ownership can change over time and may not fit a simple binary classification.
