@@ -1,116 +1,129 @@
-# 🚀 The Evolution of Space Exploration (1957–2023)
+# The Evolution of Space Exploration (1957–2023)
 
 ## Project Overview
 
-This project explores the history of space exploration using a dataset containing more than 6,700 space missions.
+This project explores historical space-launch activity using a dataset of more than 6,700 missions.
 
-The goal was to analyze how space exploration evolved over time, how global leadership shifted between nations, how mission reliability improved, and how private companies transformed the industry.
+The analysis focuses on:
 
----
+- launch activity over time,
+- shifts among major organization groups,
+- recorded mission success rates,
+- and the rise of private launch organizations.
 
-## Tools Used
+## Tools
 
-* Python
-* Pandas
-* Matplotlib
-* Jupyter Notebook
-
----
+- Python
+- Pandas
+- Matplotlib
+- Jupyter Notebook
 
 ## Dataset
 
-The original dataset contains historical space mission records from 1957 to early 2024.
+The repository contains a local CSV snapshot with mission dates, organizations, launch locations, mission details, rocket status, and mission status.
 
-Since the data for 2024 was incomplete, only missions from **1957 to 2023** were included in the analysis.
+The dataset includes records into early 2024. Because 2024 is incomplete in the snapshot, the analysis is restricted to **1957–2023**.
 
-The dataset contains:
+### Data provenance note
 
-* Mission dates
-* Organizations
-* Launch locations
-* Mission outcomes
-* Rocket status
+The exact original download URL/version for the CSV is not documented in the repository history. The column structure is consistent with datasets derived from historical launch listings such as the widely circulated “All Space Missions from 1957” datasets, but this project does **not** claim a specific original source without a verifiable record.
 
----
+Before using the project as a formal research source, the dataset provenance should therefore be confirmed independently.
 
-# Research Questions
+## Methodology
 
-## 1. How Has Space Exploration Developed Since 1957?
+### Data preparation
+
+- remove unused columns,
+- extract launch-location country labels,
+- parse launch dates,
+- derive year and decade,
+- exclude incomplete 2024 observations.
+
+### Organization mappings
+
+Two manually curated mappings are used for exploratory comparisons:
+
+1. organization → broad national/regional group,
+2. organization → simplified public/private classification.
+
+Only mapped organizations are included in those comparisons. The notebook prints mapping coverage so that the excluded share is visible.
+
+Public/private status can be institutionally and historically complex, so this classification is intentionally treated as an analytical simplification rather than an authoritative taxonomy.
+
+## Research Questions
+
+### 1. How has launch activity changed since 1957?
 
 ![Evolution of Space Missions](images/evolution_of_space_missions.png)
 
-### Key Finding
+The dataset shows an early expansion during the Space Race, lower activity after the Cold War period, and strong growth in recent years. In this snapshot, 2023 has the highest annual mission count.
 
-Space activity experienced three major phases:
-
-* Rapid growth during the Space Race
-* Decline after the collapse of the Soviet Union
-* Strong resurgence during the modern commercial space era
-
-By 2023, annual launch activity reached its highest level in the dataset.
-
----
-
-## 2. How Has the Balance of Power in Space Exploration Changed Over Time?
+### 2. How did activity shift among selected organization groups?
 
 ![Space Power Balance](images/space_power_balance.png)
 
-### Key Finding
+The manually classified subset shows major changes in the organizations contributing to launch activity over time. Because the mapping is incomplete, this chart should not be interpreted as a complete ranking of national space programs.
 
-The Soviet Union dominated the early space age, while the United States remained the long-term leader.
-
-China emerged as a major space power during the twenty-first century and now plays a central role in global launch activity.
-
----
-
-## 3. How Reliable Has Space Exploration Become?
+### 3. How did recorded mission success rates change?
 
 ![Mission Success Rate by Decade](images/mission_success_rate_by_decade.png)
 
-### Key Finding
+A mission is classified as successful when `Mission_Status == "Success"`; all other recorded outcomes are treated as non-successes.
 
-Mission success rates increased dramatically during the 1960s and exceeded 90% by the 1970s.
+Recorded success rates rise sharply in the early decades and remain high later in the dataset. This is descriptive and does not identify the engineering or operational causes of that change.
 
-Since then, reliability has remained consistently high.
-
----
-
-## 4. Has Private Spaceflight Created a New Era of Space Exploration?
+### 4. How did classified public and private launch activity change?
 
 ![Public vs Private Spaceflight](images/public_vs_private_spaceflight.png)
 
-### Key Finding
+Within the manually classified subset, private launch organizations become increasingly prominent in recent years.
 
-Private organizations now conduct a significant share of global space missions.
-
-The data suggests that modern launch growth is increasingly driven by commercial companies.
-
----
-
-## Bonus Analysis: The SpaceX Effect
+### Bonus: SpaceX within the classified subset
 
 ![SpaceX Effect](images/spacex_effect.png)
 
-### Key Finding
+Within the classified organizations, SpaceX accounts for a large share of recent private launch activity.
 
-SpaceX has become one of the most influential organizations in modern spaceflight.
+## Reproducibility
 
-By 2023, SpaceX was conducting nearly as many missions as all public organizations combined and more missions than all other private companies combined.
+Install dependencies:
 
----
+```bash
+python -m pip install -r requirements.txt
+```
 
-# Final Conclusions
+Then run:
 
-The analysis revealed five major insights:
+```text
+notebooks/space_missions_analysis.ipynb
+```
 
-1. Space exploration has entered a new growth phase.
-2. Leadership has shifted from the Soviet Union to the United States and increasingly toward China.
-3. Spaceflight became highly reliable surprisingly early.
-4. Private companies are reshaping the industry.
-5. SpaceX is the primary driver of the modern launch boom.
+The notebook uses project-relative paths and recreates the figures in `images/`.
 
----
+## Project Structure
 
-## Author
+```text
+space-exploration-analysis/
+├── data/
+│   └── all_space_mission_launches.csv
+├── images/
+├── notebooks/
+│   └── space_missions_analysis.ipynb
+├── requirements.txt
+└── README.md
+```
 
-Created as part of my Data Analytics portfolio project series.
+## Limitations
+
+- 2024 is excluded because it is incomplete in the dataset snapshot.
+- Dataset provenance is not fully documented and should be confirmed before research use.
+- Country labels extracted from launch locations do not necessarily represent the organization operating the mission.
+- National/regional and public/private comparisons rely on incomplete manually curated mappings.
+- Public/private ownership can change over time and may not fit a simple binary classification.
+- Mission types differ substantially, so mission counts do not measure mission complexity or strategic importance.
+- The analysis is descriptive and does not establish causal historical explanations.
+
+## Portfolio Value
+
+The project demonstrates data cleaning, feature engineering, time-based aggregation, categorical mapping, visualization, data-quality awareness, and explicit treatment of analytical limitations.
